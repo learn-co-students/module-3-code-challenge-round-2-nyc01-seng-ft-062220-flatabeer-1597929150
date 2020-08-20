@@ -1,12 +1,8 @@
 
-// Change the beer's description and still see that change when reloading the page
-// Add a review for the beer (no persistence needed)
 
 document.addEventListener("DOMContentLoaded", function() { renderBeer()
 
     // See the first beer's details, including its name, image, description, and reviews, when the page loads
-
-//const name = document.querySelector('h2')
 
 const main = document.querySelector('main')
 
@@ -41,18 +37,13 @@ const main = document.querySelector('main')
          } 
 
 // Change the beer's description and still see that change when reloading the page
- 
-
-// find textareaa , patch , new value 
-
-
 
 document.addEventListener('click', function(e) { e.preventDefault()
-   
-if (e.target.textContent==="Update Beer") {
-     console.dir(e.target.parentNode.firstChild)
-   // let textarea= firstChild
     
+if (e.target.textContent==="Update Beer") {
+    
+    let text = e.target.parentNode[0].textContent
+    console.log(text)
 
     let options = {
         method: "PATCH",
@@ -60,15 +51,24 @@ if (e.target.textContent==="Update Beer") {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: JSON.stringify({ description: textarea.textContent   })
+        body: JSON.stringify({ description: text   })
     } 
-    fetch( "http://localhost:3000/beers/1" + options)
+    fetch( "http://localhost:3000/beers/1" , options)
     .then(resp => resp.json())
+    .then(obj => {console.log(obj)})
 }
-
-
+// Add a review for the beer (no persistence needed) 
+if (e.target.value==="Submit") {
+    let review = e.target.parentNode[0]
+    console.dir(review)
+    
 
  
+ } 
+
+ 
+ 
+
  })
 
 

@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function(){
             const newDescription = descriptionText.value
             const updateButton = descriptionForm.querySelector("button")
             if(e.target === updateButton){
-                // e.preventDefault() <--is this needed? it works either way.
+                e.preventDefault() //<--is this needed? it works either way.
                 //update description in database to new text area value
                 //fetch the beer and patch it
 
@@ -66,14 +66,37 @@ document.addEventListener("DOMContentLoaded", function(){
 
                     fetch(beersUrl + 1, configObj)
                     .then(response => response.json)
-                    .then(newBeerDescription => {
-                        descriptionText.value = newBeerDescription
-                    }) //closing PATCH fetch
+                    .then(console.log) //closing PATCH fetch
                 }) //closing GET fetch
             } //closing out if
         }) //closing out listener
     } //closing out click handler
 
+
+const submitHandler = () => {
+    const reviewForm = document.querySelector(".review-form")
+    reviewForm.addEventListener("submit", function(e){
+        e.preventDefault()
+        let form = e.target
+        let textBox = form.querySelector("textarea")
+        let newReview = textBox.value
+
+        fetch(beersUrl + 1)
+        .then(response => response.json())
+        .then(firstBeerObj => {
+            let reviews = firstBeerObj.reviews
+            const reviewLi = document.createElement('li')
+            reviewLi.innerHTML = `${newReview}`
+            reviewList.append(reviewLi)
+            form.reset()
+           
+        }) //end fetch
+        
+    }) //end listener
+} //end clickHandler
+
+
+submitHandler()
 getFirstBeer()
 clickHandler()
 

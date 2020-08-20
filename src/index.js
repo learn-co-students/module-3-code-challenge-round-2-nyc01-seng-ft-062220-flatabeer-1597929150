@@ -36,6 +36,17 @@ const main = document.querySelector('main')
         })
          } 
 
+    //  (for advanced deliverable 1)
+            // obj.reviews.forEach(rev => {
+            // ul = ul.querySelectorAll('.reviews')
+            //  li = document.createElement('li')
+            //  li.textContent = rev
+            // ul.appendChild(li)
+
+
+
+         })
+
 // Change the beer's description and still see that change when reloading the page
 
 document.addEventListener('click', function(e) { e.preventDefault()

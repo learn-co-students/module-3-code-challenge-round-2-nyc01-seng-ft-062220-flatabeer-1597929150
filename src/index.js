@@ -55,7 +55,6 @@ if (e.target.textContent==="Update Beer") {
     } 
     fetch( "http://localhost:3000/beers/1" , options)
     .then(resp => resp.json())
-    .then(obj => {console.log(obj)})
 }
 // Add a review for the beer (no persistence needed)
 
@@ -65,16 +64,30 @@ if (e.target.value==="Submit") {
     let newReview = document.createElement('li')
     newReview.textContent = review
     ul.appendChild(newReview)
-    
-    
 
- 
+    // advanced deliverable: making review persistence 
+    // NOT finished. Need to change renderBeer() 
+
+
+    allReviews = ul.querySelectorAll('li');
+    array = [];
+    allReviews.forEach(rev => {array.push(rev.textContent)
+})
+    console.log(array)
+
+    let options = {method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+        },
+        body: JSON.stringify({  reviews: array    })
  } 
 
- 
- 
+    fetch("http://localhost:3000/beers", options) 
+    .then(resp => resp.json())
+    .then(obj => {console.log(obj) })
 
- })
+ }
 
 
 
@@ -84,4 +97,4 @@ if (e.target.value==="Submit") {
 
 
 })
-
+})

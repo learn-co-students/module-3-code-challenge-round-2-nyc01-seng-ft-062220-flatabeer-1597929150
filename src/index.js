@@ -2,6 +2,10 @@
 document.addEventListener("DOMContentLoaded", e => {
 
 const url = "http://localhost:3000/beers/1"
+const nameH2 = document.querySelector(".beer-name")
+const imageImg = document.querySelector("img")
+const descText = document.querySelector("textarea")
+const reviewUl = document.querySelector(".reviews")
 
 function getBeers(){
     fetch(url)
@@ -10,21 +14,34 @@ function getBeers(){
   }
 
 function renderBeer(beers) {
-  const nameH2 = document.querySelector(".beer-name")
-  const imageImg = document.querySelector("img")
-  const descText = document.querySelector("textarea")
-  const reviewForm = document.querySelector(".review-form")
-  
+  nameH2.innerText = `${beers.name}`
+  imageImg.src = `${beers.image_url}`
+  descText.innerText = `${beers.description}`
+  reviewUl.innerHTML = ''
 
-  beers.reviews
-}
+  beers.reviews.forEach(review => {
+      renderReview(review, reviewUl)
+    })
+    // debugger
+}//end of renderBeer
 
-function renderReview(review, reviewForm) {
-  const reviewTextarea = document.createElement("textarea")
-  reviewTextarea.innerText = `${review.}`
-}
+function renderReview(review, reviewUl) {
+  const reviewTextarea = document.createElement("li")
+  reviewTextarea.innerText = `${review}`
+
+  reviewUl.append(reviewTextarea)
+}//end of renderReview
+
+document.addEventListener("submit", e => {
+    e.preventDefault()
+    const updateBtn = document.querySelector(".update-button")
+    if(e.target === "updateBtn"){
+        console.log(e.target)
+    }
 
 
+
+}) //end of submit listener
 
 
 
@@ -37,10 +54,9 @@ getBeers()
 
 }) //end of DOMContentLoaded
 
-
 /*
 CORE---------------------------------
-1) User can see first beer's name, image, descr, reviews
+1)√ User can see first beer's name, image, descr, reviews
 
 2) User can change description (PATCH)
 2a) Updated description visible on front end (when reloading page!)

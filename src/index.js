@@ -53,20 +53,51 @@ document.addEventListener("submit", e => {
             .then(response => response.json())
           
     }
-
-    //adding new review, no presistence
+    //adding new review, no persistence
     if(e.target === reviewForm){
-        let newReview = 
+        const reviewTextbox = document.querySelector(".review-form > textarea")
+        let newReview = reviewTextbox.value 
+
+            function renderReview(review) {
+                const reviewTextarea = document.createElement("li")
+                reviewTextarea.innerText = `${review}`
+            
+                reviewUl.append(reviewTextarea)
+            }//end of renderReview
+        
+        renderReview(newReview)
+        //end of core deliverables--------------------------------------------------------
+        
+        // // function beerFetch() {
+          
+        //     fetch(url)
+        //     .then(response => response.json())
+        //     .then(beer => renderBeer(beer))
+        // // }
+
+        // const reviewConfig = {
+        //     // beerFetch()
+        //         method: "POST",
+        //         headers: {
+        //           "content-type": "application/json",
+        //           "accept": "application/json"
+        //         },
+        //         body: JSON.stringify({
+        //             id: beer.id,
+        //             name: beer.name,
+        //             description: beer.description,
+        //             image_url: beer.image_url,
+        //             reviews: newReview
+                
+        //         })
+        // }
+
+        //     fetch(url, reviewConfig)
+        //     .then(response => response.json())
+            
     }
 
-
-
 }) //end of submit listener
-
-
-
-
-
 
 
 //invoke functions
@@ -81,17 +112,13 @@ CORE---------------------------------
 2)√ User can change description (PATCH)
 2a)√ Updated description visible on front end (when reloading page!) (PATCH)
 
-3) Add NEW review for beer (no persistence)
+3)√ Add NEW review for beer (no persistence)
 
 ADVANCED---------------------------------
 
 3a) Persist a new review (POST)
 3b) Delete a review (DELETE)
 4) menu of beers 
-
-
-
-
 
 
 */

@@ -34,9 +34,29 @@ function renderReview(review, reviewUl) {
 
 document.addEventListener("submit", e => {
     e.preventDefault()
-    const updateBtn = document.querySelector(".update-button")
-    if(e.target === "updateBtn"){
-        console.log(e.target)
+    const updateForm = document.querySelector(".description")
+    const reviewForm = document.querySelector(".review-form")
+    //updating the description and sending PATCH request
+    if(e.target === updateForm){
+        let newDesc = descText.value
+
+        const configObj = {
+                method: "PATCH",
+                headers: {
+                  "content-type": "application/json",
+                  "accept": "application/json"
+                },
+                body: JSON.stringify({description: newDesc})
+        }
+
+            fetch(url, configObj)
+            .then(response => response.json())
+          
+    }
+
+    //adding new review, no presistence
+    if(e.target === reviewForm){
+        let newReview = 
     }
 
 
@@ -58,8 +78,8 @@ getBeers()
 CORE---------------------------------
 1)√ User can see first beer's name, image, descr, reviews
 
-2) User can change description (PATCH)
-2a) Updated description visible on front end (when reloading page!)
+2)√ User can change description (PATCH)
+2a)√ Updated description visible on front end (when reloading page!) (PATCH)
 
 3) Add NEW review for beer (no persistence)
 

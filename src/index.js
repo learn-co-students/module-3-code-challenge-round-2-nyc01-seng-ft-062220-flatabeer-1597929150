@@ -32,16 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if(event.target.innerText === 'UPDATE BEER') {
             const form = event.target
             // console.dir(form)
-            const text = form.children[0]
-            const newText =text.value 
-
+            const newDescription = form.children[0].value
+            
             const options = {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
                 },
-                body: JSON.stringify( {description: newText} )
+                body: JSON.stringify( {description: newDescription} )
             }
             fetch('http://localhost:3000/beers/1', options)
             .then(response => response.json())
@@ -49,11 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }else if(event.target.className = 'review-form') {
             const commentForm = event.target
             // console.dir(commentForm)
-            const commentBox =commentForm.children[0]
-            const newComment = commentBox.value
+            const comment =commentForm.children[0].value
             const reviewUl = document.querySelector("body > main > div > ul")
             const createLi = document.createElement('li')
-            createLi.innerText = newComment
+            createLi.innerText = comment
             reviewUl.appendChild(createLi)
         }
     })

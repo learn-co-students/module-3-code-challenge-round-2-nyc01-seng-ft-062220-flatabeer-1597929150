@@ -2,6 +2,12 @@
 document.addEventListener("DOMContentLoaded", () => {
   const PATCHURL ="http://localhost:3000/beers/1"
 
+
+
+
+
+
+
   const clickHandler = () => {
     document.addEventListener('click', (e) => {
       e.preventDefault()
@@ -9,16 +15,50 @@ document.addEventListener("DOMContentLoaded", () => {
         updateBeer(e.target)
       }
 
-
-
+    })
+    document.addEventListener("submit", (e) => {
+      e.preventDefault()
+      submitReview(e.target)
     })
   }
 
-  function updateBeer(updateButton){
-    const updateID = updateButton.dataset.id
+  function submitReview(review) {
+    const reviews = beerObj.reviews
+
+    const options = {
+      method:'POST',
+      headers:{
+        'Content-Type': 'application/json',
+        'accept': 'application/json'
+      },
+      body: JSON.stringify({reviews: review})
+    }
+
+    fetch(PATCHURL, options)
+    .then(response => response.json())
+    .then(obj => console.log())
   }
 
 
+
+  function updateBeer(updateBtn) {
+    let description = document.querySelector("body > main > div > form.description > textarea").innerText =""
+    let newDescription = "words" // concept
+    description = newDescription
+    const options = {
+      method:'PATCH',
+      headers:{
+        'Content-Type': 'application/json',
+        'accept': 'application/json'
+      },
+      body: JSON.stringify({id: 1, description: description})
+    }
+
+// appear on dom
+    fetch(PATCHURL, options)
+    .then(response => response.json())
+    .then(obj => console.log(obj))
+  }
 
 
 

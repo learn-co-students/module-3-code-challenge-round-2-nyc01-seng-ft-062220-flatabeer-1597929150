@@ -63,9 +63,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
                     fetch(beersUrl + 1, configObj)
                     .then(response => response.json())
-                    .then(firstBeerObj => {
-                        let newDescription = firstBeerObj.description
-                    }) //closing PATCH fetch
+                    .then(console.log) //closing PATCH fetch
                 }) //closing GET fetch
             } //closing out if
         }) //closing out listener

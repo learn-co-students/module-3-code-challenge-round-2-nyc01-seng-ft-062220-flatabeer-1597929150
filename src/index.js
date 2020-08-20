@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function(){
             const newDescription = descriptionText.value
             const updateButton = descriptionForm.querySelector("button")
             if(e.target === updateButton){
-                e.preventDefault() //<--is this needed? it works either way.
+                e.preventDefault()
                 //update description in database to new text area value
                 //fetch the beer and patch it
 
@@ -74,6 +74,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 const submitHandler = () => {
+    //find the correct form and add a listener
+    //grab input text and assign it inside new li, append to the comment UL defined up top
     const reviewForm = document.querySelector(".review-form")
     reviewForm.addEventListener("submit", function(e){
         e.preventDefault()
@@ -89,15 +91,12 @@ const submitHandler = () => {
             reviewLi.innerHTML = `${newReview}`
             reviewList.append(reviewLi)
             form.reset()
-           
         }) //end fetch
-        
     }) //end listener
 } //end clickHandler
 
-
-submitHandler()
 getFirstBeer()
 clickHandler()
+submitHandler()
 
 })

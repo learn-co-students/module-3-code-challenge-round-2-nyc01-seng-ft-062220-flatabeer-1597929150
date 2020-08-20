@@ -1,6 +1,5 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-  const PATCHURL ="http://localhost:3000/beers/1"
+  const PATCHURL = "http://localhost:3000/beers/1"
 
 
 
@@ -11,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const clickHandler = () => {
     document.addEventListener('click', (e) => {
       e.preventDefault()
-      if(e.target.matches("body > main > div > form.description > button")){
+      if (e.target.matches("body > main > div > form.description > button")) {
         updateBeer(e.target)
       }
 
@@ -26,38 +25,44 @@ document.addEventListener("DOMContentLoaded", () => {
     const reviews = beerObj.reviews
 
     const options = {
-      method:'POST',
-      headers:{
+      method: 'POST',
+      headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json'
       },
-      body: JSON.stringify({reviews: review})
+      body: JSON.stringify({
+        reviews: review
+      })
     }
 
     fetch(PATCHURL, options)
-    .then(response => response.json())
-    .then(obj => console.log())
+      .then(response => response.json())
+      .then(obj => console.log())
   }
 
 
 
   function updateBeer(updateBtn) {
-    let description = document.querySelector("body > main > div > form.description > textarea").innerText =""
-    let newDescription = "words" // concept
-    description = newDescription
+    let description = document.querySelector("body > main > div > form.description > textarea").innerText
+    let newDescription = "new description" // concept
+    document.querySelector("body > main > div > form.description > textarea").innerText = newDescription
     const options = {
-      method:'PATCH',
-      headers:{
+      method: 'PATCH',
+      headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json'
       },
-      body: JSON.stringify({id: 1, description: description})
+      body: JSON.stringify({
+        id: 1,
+        description: newDescription
+      })
     }
+    // not sure why new description doesnt update
 
-// appear on dom
+    // appear on dom
     fetch(PATCHURL, options)
-    .then(response => response.json())
-    .then(obj => console.log(obj))
+      .then(response => response.json())
+      .then(obj => console.log(obj))
   }
 
 
@@ -85,11 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const getBeer = () => {
     fetch(PATCHURL)
-    .then(res => res.json())
-    .then(beerObj => renderHtml(beerObj))
+      .then(res => res.json())
+      .then(beerObj => renderHtml(beerObj))
   }
-
-
 
 
 

@@ -25,17 +25,14 @@ document.addEventListener("DOMContentLoaded", function(){
         const beerDescription = document.querySelector("textarea")
         beerDescription.innerText = firstBeer.description   
         
-        reviewList.innerHTML = ` `
+        reviewList.innerHTML = ` ` //clear out existing comments
         //replace beer reviews
         firstBeer.reviews.forEach(review => {
             const reviewLi = document.createElement("li")
-            reviewLi.innerHTML = review
+            reviewLi.innerHTML = `${review}`
             reviewList.append(reviewLi)
             // debugger
-        })
- 
-
-        
+        })       
     }
 
 
@@ -65,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     }
 
                     fetch(beersUrl + 1, configObj)
-                    .then(response => response.json)
+                    .then(response => response.json())
                     .then(console.log) //closing PATCH fetch
                 }) //closing GET fetch
             } //closing out if

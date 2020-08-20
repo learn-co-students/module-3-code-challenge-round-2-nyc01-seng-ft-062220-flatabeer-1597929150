@@ -42,8 +42,8 @@ document.addEventListener('click', function(e) { e.preventDefault()
     
 if (e.target.textContent==="Update Beer") {
     
-    let text = e.target.parentNode[0].textContent
-    console.log(text)
+    let text = e.target.parentNode[0].value
+    console.dir(e.target.parentNode[0].value)
 
     let options = {
         method: "PATCH",
@@ -57,10 +57,15 @@ if (e.target.textContent==="Update Beer") {
     .then(resp => resp.json())
     .then(obj => {console.log(obj)})
 }
-// Add a review for the beer (no persistence needed) 
+// Add a review for the beer (no persistence needed)
+
 if (e.target.value==="Submit") {
-    let review = e.target.parentNode[0]
-    console.dir(review)
+    let review = e.target.parentNode[0].value
+    let ul = document.querySelector(".reviews")
+    let newReview = document.createElement('li')
+    newReview.textContent = review
+    ul.appendChild(newReview)
+    
     
 
  

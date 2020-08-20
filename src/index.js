@@ -2,6 +2,25 @@
 document.addEventListener("DOMContentLoaded", () => {
   const PATCHURL ="http://localhost:3000/beers/1"
 
+  const clickHandler = () => {
+    document.addEventListener('click', (e) => {
+      e.preventDefault()
+      if(e.target.matches("body > main > div > form.description > button")){
+        updateBeer(e.target)
+      }
+
+
+
+    })
+  }
+
+  function updateBeer(updateButton){
+    const updateID = updateButton.dataset.id
+  }
+
+
+
+
 
 
   const renderHtml = (beerObj) => {
@@ -40,7 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
+  // submitHandler()
+  clickHandler()
   getBeer()
 
 })

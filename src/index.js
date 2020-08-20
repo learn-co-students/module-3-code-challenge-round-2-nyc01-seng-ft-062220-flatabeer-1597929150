@@ -20,5 +20,26 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
+    document.addEventListener('submit', (event) => {
+        event.preventDefault()
+        if(event.target.innerText === 'UPDATE BEER') {
+            const form = event.target
+            const text = form.children[0]
+            const newText =text.value 
+
+            const options = {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify( {description: newText} )
+            }
+            fetch('http://localhost:3000/beers/1', options)
+            .then(response => response.json())
+            
+        }
+    })
+
 
 })

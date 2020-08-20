@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", function(){
 
     const beersUrl = "http://localhost:3000/beers/"
+    const reviewList = document.querySelector(".reviews")
 
     //fetch first beer only
     const getFirstBeer = () => {
@@ -22,7 +23,18 @@ document.addEventListener("DOMContentLoaded", function(){
         
         //replace beer description
         const beerDescription = document.querySelector("textarea")
-        beerDescription.innerText = firstBeer.description        
+        beerDescription.innerText = firstBeer.description   
+        
+        reviewList.innerHTML = ` `
+        //replace beer reviews
+        firstBeer.reviews.forEach(review => {
+            const reviewLi = document.createElement("li")
+            reviewLi.innerHTML = review
+            reviewList.append(reviewLi)
+            // debugger
+        })
+ 
+
         
     }
 
@@ -30,15 +42,37 @@ document.addEventListener("DOMContentLoaded", function(){
     const clickHandler = () => {
         document.addEventListener("click", function(e){
             const descriptionForm = document.querySelector(".description")
+            const descriptionText = descriptionForm.querySelector("textarea")
+            const newDescription = descriptionText.value
             const updateButton = descriptionForm.querySelector("button")
             if(e.target === updateButton){
-                e.preventDefault()
-                
+                // e.preventDefault() <--is this needed? it works either way.
+                //update description in database to new text area value
+                //fetch the beer and patch it
 
-                
-            }
-        })
-    }
+                fetch(beersUrl + 1)
+                .then(response => response.json())
+                .then(firstBeerObj => {
+                    let beerDescription = firstBeerObj.description
+                    
+                    const configObj = {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                        },
+                        body: JSON.stringify({description: newDescription})
+                    }
+
+                    fetch(beersUrl + 1, configObj)
+                    .then(response => response.json)
+                    .then(newBeerDescription => {
+                        descriptionText.value = newBeerDescription
+                    }) //closing PATCH fetch
+                }) //closing GET fetch
+            } //closing out if
+        }) //closing out listener
+    } //closing out click handler
 
 getFirstBeer()
 clickHandler()

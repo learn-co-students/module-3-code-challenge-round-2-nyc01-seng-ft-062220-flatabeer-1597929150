@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('submit', (event) => {
         event.preventDefault()
         if(event.target.innerText === 'UPDATE BEER') {
-            const form = event.target
+            // const form = event.target
             // console.dir(form)
-            const newDescription = form.children[0].value
+            const newDescription = event.target.children[0].value
             
             const options = {
                 method: 'PATCH',
@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             
         }else if(event.target.className = 'review-form') {
-            const commentForm = event.target
+            // const commentForm = event.target
             // console.dir(commentForm)
-            const comment =commentForm.children[0].value
+            const comment = event.target.children[0].value
             const reviewUl = document.querySelector("body > main > div > ul")
             const createLi = document.createElement('li')
             createLi.innerText = comment
